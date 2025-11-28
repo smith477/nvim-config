@@ -1,8 +1,9 @@
-tt.*
-.tests
-doc/tags
-debug
-.repro
-foo.*
+# Ignore plugin data
+lazy-lock.json
+.luarc.json
+
+# Ignore logs and cache
 *.log
-data
+
+# Ignore local/private configs (if you have any)
+lua/config/local.lua
