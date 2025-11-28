@@ -1,9 +1,22 @@
-# Ignore plugin data
+# Plugin lockfiles
 lazy-lock.json
+lazyvim.json
+
+# Config caches
+.neoconf.json
 .luarc.json
 
-# Ignore logs and cache
+# Formatter configs (auto-generated)
+stylua.toml
+
+# Logs
 *.log
 
-# Ignore local/private configs (if you have any)
-lua/config/local.lua
+# Temp files
+Untitled
+*~
+*.swp
+*.swo
+
+# OS files
+.DS_Store
