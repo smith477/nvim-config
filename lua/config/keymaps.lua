@@ -17,3 +17,6 @@ end, { desc = "Terminal vertical" })
 
 -- Exit terminal mode with jk
 vim.keymap.set("t", "jk", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+
+-- NOTE: Test keybindings are now in lua/plugins/xcodebuild-plugin.lua
+-- This avoids conflicts and keeps test-related configs together
