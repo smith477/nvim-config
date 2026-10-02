@@ -1,16 +1,7 @@
+-- Go parsers come from LazyVim's lang.go extra; Swift has no LazyVim extra.
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = function(_, opts)
-      if type(opts.ensure_installed) == "table" then
-        vim.list_extend(opts.ensure_installed, {
-          "go",
-          "gomod",
-          "gowork",
-          "gosum",
-          "swift",
-        })
-      end
-    end,
+    opts = { ensure_installed = { "swift" } },
   },
 }

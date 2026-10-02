@@ -21,6 +21,13 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.lang.typescript" },
     { import = "lazyvim.plugins.extras.lang.json" },
     { import = "lazyvim.plugins.extras.ui.mini-animate" },
+    -- Go: gopls, goimports/gofumpt, delve debugging, neotest-golang
+    { import = "lazyvim.plugins.extras.lang.go" },
+    -- Tests (<leader>t…) and debugging (<leader>d…), shared by Go and Swift
+    { import = "lazyvim.plugins.extras.test.core" },
+    { import = "lazyvim.plugins.extras.dap.core" },
+    -- Completion: nvim-cmp instead of blink (obsidian.nvim uses it)
+    { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
 
     -- Load the 'plugins' module where you define your plugins
     { import = "plugins" },
@@ -29,7 +36,11 @@ require("lazy").setup({
     lazy = true,
     version = false, -- always use the latest git version
   },
-  install = { colorscheme = { "catppuccin", "habamax" } },
+  install = { colorscheme = { "dracula", "habamax" } },
+  -- No plugin in this config requires luarocks, and the hererocks bootstrap
+  -- fails (`:checkhealth lazy` reports luarocks/lua 5.1 not installed).
+  -- Disabling it removes the error instead of installing an unused toolchain.
+  rocks = { hererocks = false },
   checker = { enabled = true }, -- automatically check for plugin updates
   performance = {
     rtp = {
