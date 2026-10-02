@@ -28,6 +28,8 @@ require("lazy").setup({
     { import = "lazyvim.plugins.extras.dap.core" },
     -- Completion: nvim-cmp instead of LazyVim's default (blink)
     { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
+    -- GitHub PRs/issues and code reviews inside Neovim (octo.nvim)
+    { import = "lazyvim.plugins.extras.util.octo" },
 
     -- Load the 'plugins' module where you define your plugins
     { import = "plugins" },
