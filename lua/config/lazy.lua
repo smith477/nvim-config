@@ -26,7 +26,7 @@ require("lazy").setup({
     -- Tests (<leader>t…) and debugging (<leader>d…), shared by Go and Swift
     { import = "lazyvim.plugins.extras.test.core" },
     { import = "lazyvim.plugins.extras.dap.core" },
-    -- Completion: nvim-cmp instead of blink (obsidian.nvim uses it)
+    -- Completion: nvim-cmp instead of LazyVim's default (blink)
     { import = "lazyvim.plugins.extras.coding.nvim-cmp" },
 
     -- Load the 'plugins' module where you define your plugins
