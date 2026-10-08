@@ -38,7 +38,7 @@ require("lazy").setup({
     lazy = true,
     version = false, -- always use the latest git version
   },
-  install = { colorscheme = { "dracula", "habamax" } },
+  install = { colorscheme = { "catppuccin-macchiato", "habamax" } },
   -- No plugin in this config requires luarocks, and the hererocks bootstrap
   -- fails (`:checkhealth lazy` reports luarocks/lua 5.1 not installed).
   -- Disabling it removes the error instead of installing an unused toolchain.
