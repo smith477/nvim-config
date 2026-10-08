@@ -14,6 +14,10 @@ return {
     priority = 1000,
     opts = {
       flavour = "macchiato",
+      -- Under kitty, Catppuccin shifts every colour one shade (#24273a → #24273b) so kitty
+      -- can't make Neovim see-through. We want see-through: kitty.conf makes the exact
+      -- Catppuccin backgrounds transparent (transparent_background_colors), so keep them exact.
+      kitty = false,
     },
   },
 }
