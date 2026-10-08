@@ -29,7 +29,13 @@ local function gh_env()
   return {}
 end
 
+-- ssh_aliases: remotes like git@github.com-personal:… (an ~/.ssh/config
+-- alias) are really github.com, where gh is logged in.
 return {
   "pwntester/octo.nvim",
-  opts = { default_to_projects_v2 = false, gh_env = gh_env },
+  opts = {
+    default_to_projects_v2 = false,
+    gh_env = gh_env,
+    ssh_aliases = { ["github.com-personal"] = "github.com" },
+  },
 }
