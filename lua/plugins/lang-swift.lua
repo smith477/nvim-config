@@ -92,6 +92,57 @@ return {
     config = function(_, opts)
       require("xcodebuild").setup(opts)
       require("xcodebuild.integrations.dap").setup() -- uses lldb-dap from Xcode
+
+      -- The log panel only follows new lines when it is not the focused window.
+      -- Keep the cursor on the latest line while it is already at the bottom,
+      -- and leave it alone after a scroll upward.
+      local panel = require("xcodebuild.xcode_logs.panel")
+      local append_log_lines = panel.append_log_lines
+      local open_logs = panel.open_logs
+
+      local function log_buffer()
+        local appdata = require("xcodebuild.project.appdata")
+        local util = require("xcodebuild.util")
+        return util.get_buf_by_filename(appdata.build_logs_filename, { returnNotLoaded = false })
+      end
+
+      local function scroll_to_bottom(winnr)
+        if vim.api.nvim_win_is_valid(winnr) then
+          vim.api.nvim_win_call(winnr, function()
+            vim.cmd("keepjumps normal! Gzb")
+          end)
+        end
+      end
+
+      function panel.open_logs(scroll_to_bottom)
+        open_logs(scroll_to_bottom)
+        local bufnr = log_buffer()
+        if not bufnr then
+          return
+        end
+        for _, winnr in ipairs(vim.fn.win_findbuf(bufnr)) do
+          scroll_to_bottom(winnr)
+        end
+      end
+
+      function panel.append_log_lines(lines, format)
+        local bufnr = log_buffer()
+        local follow = {}
+        if bufnr and vim.api.nvim_get_current_buf() == bufnr then
+          local last = vim.api.nvim_buf_line_count(bufnr)
+          for _, winnr in ipairs(vim.fn.win_findbuf(bufnr)) do
+            if vim.api.nvim_win_get_cursor(winnr)[1] >= last then
+              follow[winnr] = true
+            end
+          end
+        end
+
+        append_log_lines(lines, format)
+
+        for winnr, _ in pairs(follow) do
+          scroll_to_bottom(winnr)
+        end
+      end
     end,
     keys = {
       { "<leader>X", cmd("XcodebuildPicker"), desc = "Xcodebuild Actions" },
